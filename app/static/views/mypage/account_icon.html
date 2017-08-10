@@ -1,0 +1,25 @@
+{% extends "parts/layout.html" %}
+{% block body %}
+<div class="l_000">
+    <h1 class="p_002 b_002 c_b_011 c_c_001">Icon</h1>
+    {% include "parts/menu.html" %}
+    <form action="{{ '' | getenv('SITE_URL') }}/mypage/account/icon/post" name="form" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="l_004">
+            <img src="{{ data.icon }}" alt="{{ data.name }}">
+        </div>
+        <input id="icon" type="file" class="l_006" name="icon" accept="image/*" onChange="submit()">
+        <label for="icon" class="p_011 b_002 c_b_001 c_c_001">ファイルを選択する</label>
+    </form>
+    {% if data.error %}
+    <p class="p_003 b_002 c_c_001 c_b_005">{{ data.error }}</p>
+    {% endif %}
+</div>
+<div class="l_002 _1">
+    <a href="/logout" class="p_009 c_c_003 i_0004 icon"></a>
+</div>
+<div class="l_002">
+    <a href="/topics" class="p_009 c_c_003 i_0003 icon"></a>
+</div>
+<script> function submit() { document.form.submit() } </script>
+{% endblock %}

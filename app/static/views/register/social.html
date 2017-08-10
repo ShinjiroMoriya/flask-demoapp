@@ -1,0 +1,19 @@
+{% extends "parts/layout.html" %}
+{% block body %}
+<div class="l_000">
+    <h1 class="p_002 b_002 c_b_011 c_c_001">Social Register</h1>
+    <form action="/social/register/create" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="text" class="p_005 b_002" name="name" placeholder="Name" value="{% if data.name %}{{ data.name }}{% endif %}">
+        {% if data.email %}
+        <input type="text" class="p_005 b_002" name="email" placeholder="Email" readonly value="{{ data.email }}">
+        {% else %}
+        <input type="text" class="p_005 b_002" name="email" placeholder="Email" value="">
+        {% endif %}
+        <input type="submit" class="p_004 b_002 c_b_001 c_c_001" value="Signup">
+    </form>
+    {% if data.error %}
+    <p class="p_0005">{{ data.error }}</p>
+    {% endif %}
+</div>
+{% endblock %}

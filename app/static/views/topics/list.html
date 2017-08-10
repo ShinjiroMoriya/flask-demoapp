@@ -1,0 +1,71 @@
+{% extends "parts/layout.html" %}
+{% block body %}
+<div class="l_000">
+    <h1 class="p_002 b_002 c_b_011 c_c_001">Topic</h1>
+    {% include "parts/menu.html" %}
+    <div class="l_500 b_002">
+        <div class="l_501">
+            <p class="p_001 c_c_001 c_b_002">
+                <span class="c_o_001">Topic</span>
+            </p>
+        </div>
+        <div class="l_502">
+            <p class="p_001 c_c_001 c_b_002">
+                <a href="/mypage/comments">Comment</a>
+            </p>
+        </div>
+    </div>
+    <ul class="l_009 icons">
+        {% for topic in data.topics %}
+        <li>
+            <a href="/mypage/topics/{{ topic.topicuuid }}">
+                <div class="l_400">
+                    <p class="l_401 p_007 c_c_002">{{ topic.created|datetime }}</p>
+                </div>
+                <p class="l_403 p_013">{{ topic.topic_markdown|striptags|delete_space(18) }}</p>
+            </a>
+        </li>
+        {% else %}
+        <li>
+            <p class="l_404 p_014">なし</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% if data.topics.count() %}
+    <div class="l_500 b_001">
+        {% if data.prev %}
+        <div class="l_501">
+            <p class="p_001 c_c_001 c_b_004">
+                <a href="{{ data.prev }}">Prev</a>
+            </p>
+        </div>
+        {% else %}
+        <div class="l_501">
+            <p class="p_001 c_c_001 c_b_004">
+                <span class="c_o_001">Prev</span>
+            </p>
+        </div>
+        {% endif %}
+        {% if data.next %}
+        <div class="l_502">
+            <p class="p_001 c_c_001 c_b_004">
+                <a href="{{ data.next }}">Next</a>
+            </p>
+        </div>
+        {% else %}
+        <div class="l_502">
+            <p class="p_001 c_c_001 c_b_004">
+                <span class="c_o_001">Next</span>
+            </p>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+<div class="l_002 _1">
+    <a href="/logout" class="p_009 c_c_003 i_0004 icon"></a>
+</div>
+<div class="l_002">
+    <a href="/topics" class="p_009 c_c_003 i_0003 icon"></a>
+</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends "parts/layout.html" %}
+{% block body %}
+<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+<script>
+    var Ref = new Firebase("https://flask-app.firebaseio.com/");
+    Ref.on('value', function(data) {
+        var val = data.val()
+        if ("{{ data.nowtime }}" < val.date && "{{ data.topic.topicuuid }}" == val.uuid) {
+            var xhr = new XMLHttpRequest();
+                xhr.open("GET", "/comments/get/{{ data.topic.topicuuid }}", true);
+            xhr.onload = function (e) {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var json = JSON.parse(xhr.response)
+
+                        if (json['user'] == '{{data.topic.user.name}}') {
+
+                            html = '' +
+                                '<div class="l_701">' +
+                                    '<p class="l_702 p_007"><strong>' + json['user'] + '</strong></p>' +
+                                    '<p class="l_703 p_007 c_c_002">' + json['date'] + '</p>' +
+                                '</div>' +
+                                '<div class="l_704">' +
+                                    '<div class="l_705"><img src="' + json['icon'].replace('h_800,w_800', 'h_100,w_100') + '" alt=""></div>' +
+                                    '<div class="l_706"><div class="l_709 p_006 markdown">' + json['comment'] + '</div></div>' +
+                                '</div>';
+
+                        } else {
+
+                            html = '' +
+                                '<div class="l_701">' +
+                                    '<p class="l_702 p_007"><strong>' + json['user'] + '</strong></p>' +
+                                    '<p class="l_703 p_007 c_c_002">' + json['date'] + '</p>' +
+                                '</div>' +
+                                '<div class="l_704">' +
+                                    '<div class="l_707"><img src="' + json['icon'].replace('h_800,w_800', 'h_100,w_100') + '" alt=""></div>' +
+                                    '<div class="l_708"><div class="l_709 p_006 markdown">' + json['comment'] + '</div></div>' +
+                                '</div>';
+
+                        }
+                        var li = document.createElement("li");
+                        li.innerHTML = html
+                        var element = document.getElementById('contents');
+                        element.appendChild(li);
+                    } else {
+                        console.error(xhr.statusText);
+                    }
+                }
+            };
+            xhr.onerror = function (e) {
+                console.error(xhr.statusText);
+            };
+            xhr.send(null);
+        }
+    });
+    {%- if data.comment_add %}
+    Ref.set({
+        date : "{{ data.comments[-1].created }}",
+        uuid : "{{ data.topic.topicuuid }}"
+    });
+    {%- endif %}
+</script>
+<div class="l_000">
+    <h1 class="p_002 b_002 c_b_011 c_c_001">Topics</h1>
+    {% if data.error %}
+    <p class="p_003 b_002 c_c_001 c_b_005">{{ data.error }}</p>
+    {% endif %}
+    <ul id="contents" class="l_700 c_b_012 b_002">
+        <li>
+            <div class="l_701">
+                <p class="l_702 p_007">
+                    <strong>{{ data.topic.user.name }}</strong>
+                </p>
+                <p class="l_703 p_007 c_c_002">{{ data.topic.created|datetime }}</p>
+            </div>
+            <div class="l_704">
+                <div class="l_705">
+                    <img src="{{ data.topic.user.icon|thumbnail }}" alt="">
+                </div>
+                <div class="l_706">
+                    <div class="l_709 p_006 markdown">{{ data.topic.topic_markdown|linktarget|safe }}</div>
+                </div>
+            </div>
+        </li>
+        {% for comment in data.comments %}
+        <li>
+            <div class="l_701">
+                <p class="l_702 p_007">
+                    <strong>{{ comment.user.name }}</strong>
+                </p>
+                <p class="l_703 p_007 c_c_002">{{ comment.created|datetime }}</p>
+            </div>
+            {% if comment.user.userid == data.topic.user.userid %}
+            <div class="l_704">
+                <div class="l_705">
+                    <img src="{{ comment.user.icon|thumbnail }}" alt="">
+                </div>
+                <div class="l_706">
+                    <div class="l_709 p_006 markdown">{{ comment.comment_markdown|linktarget|safe }}</div>
+                </div>
+            </div>
+            {% else %}
+            <div class="l_704">
+                <div class="l_707">
+                    <img src="{{ comment.user.icon }}" alt="">
+                </div>
+                <div class="l_708">
+                    <div class="l_709 p_006 markdown">{{ comment.comment_markdown|linktarget|safe }}</div>
+                </div>
+            </div>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% if data.logged %}
+    <form action="/comment/post/{{ data.topic.topicuuid }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="b_002 c_b_012">
+            <textarea class="p_008" name="comment" placeholder="コメントを入力"></textarea>
+        </div>
+        <input type="submit" class="p_004 b_002 c_b_005 c_c_001" value="Add Comment">
+    </form>
+    <script src="/assets/js/autosize.min.js"></script>
+    <script> autosize(document.querySelectorAll('textarea')); </script>
+    {% endif %}
+    <p class="p_001 b_002 c_c_001 c_b_004">
+        <a href="/topics">Back</a>
+    </p>
+    {% if data.logged and data.topic.user.userid == data.logged %}
+    <p class="p_001 b_002 c_c_001 c_b_001">
+        <a href="/mypage/topics/{{ data.topic.topicuuid }}?detail=back">Edit</a>
+    </p>
+    {% endif %}
+</div>
+<div class="l_001">
+    <a href="/" class="p_009 c_c_003 i_0001 icon"></a>
+</div>
+{% endblock %}

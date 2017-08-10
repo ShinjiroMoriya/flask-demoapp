@@ -1,0 +1,52 @@
+.i
+{
+    &_0001
+    {
+        &:before
+        {
+            content: "\E88A"; //home
+        }
+    }
+    &_0002
+    {
+        &:before
+        {
+            content: "\E851"; //account
+        }
+    }
+    &_0003
+    {
+        &:before
+        {
+            content: "\E0C9"; //message
+        }
+    }
+    &_0004
+    {
+        &:before
+        {
+            content: "\E5C9"; //close
+        }
+    }
+    &_0005
+    {
+        &:before
+        {
+            content: "\E147"; // Plus
+        }
+    }
+    &_0006
+    {
+        &:before
+        {
+            content: "\E15E"; // Back
+        }
+    }
+    &_0007
+    {
+        &:before
+        {
+            content: "\E150"; // Pencil
+        }
+    }
+}

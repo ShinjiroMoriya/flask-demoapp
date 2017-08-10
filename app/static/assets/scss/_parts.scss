@@ -1,0 +1,282 @@
+.p
+{
+    &_001 //Link
+    {
+        text-align: center;
+
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 48px;
+        a
+        {
+            display: block;
+        }
+    }
+    &_002 // Head Text
+    {
+        text-align: center;
+
+        font-size: 25px;
+        line-height: 48px;
+    }
+    &_003 // Small Font
+    {
+        text-align: center;
+
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 48px;
+    }
+    &_004 // input Submit
+    {
+        width: 100%;
+        height: 50px;
+
+        font-size: 20px;
+        font-weight: bold;
+    }
+    &_005 // input Text
+    {
+        width: 100%;
+        height: 50px;
+        padding: 0 10px 0 9px;
+
+        text-indent: 1px;
+
+        font-size: 16px;
+        line-height: 50px;
+    }
+    &_006
+    {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+    &_007
+    {
+        font-size: 10px;
+        line-height: 1.5;
+    }
+    &_008 //textarea
+    {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 96px;
+        padding: 15px;
+
+        font-size: 14px;
+    }
+    &_009
+    {
+        display: block;
+
+        width: 30px;
+        height: 30px;
+
+        font-size: 30px;
+        line-height: 30px;
+    }
+    &_010 //Normal
+    {
+        text-align: center;
+
+        font-size: 20px;
+        line-height: 48px;
+    }
+    &_011
+    {
+        display: block;
+
+        text-align: center;
+
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 48px;
+    }
+    &_012
+    {
+        text-align: center;
+
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    &_013
+    {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    &_014
+    {
+        font-size: 14px;
+    }
+}
+.b
+{
+    &_001
+    {
+        border-top: 2px solid #efefef;
+    }
+    &_002
+    {
+        border-bottom: 2px solid #efefef;
+    }
+}
+.c
+{
+    &_c
+    {
+        &_001
+        {
+            color: #fff;
+        }
+        &_002
+        {
+            color: #666;
+        }
+        &_003
+        {
+            color: #EA4335;
+        }
+    }
+    &_o
+    {
+        &_001
+        {
+            @include opacity(.5)
+        }
+        &_002
+        {
+            @include opacity(.7)
+        }
+    }
+    &_b
+    {
+        &_001
+        {
+            background: #2F79B9;
+        }
+        &_002
+        {
+            background: #58B957;
+        }
+        &_003
+        {
+            background: #56C0E0;
+        }
+        &_004
+        {
+            background: #F2AE43;
+        }
+        &_005
+        {
+            background: #DB524B;
+        }
+        &_006
+        {
+            background: #1da1f2; //twitter
+        }
+        &_007
+        {
+            background: #2980B9; //Facebook
+        }
+        &_008
+        {
+            background: #db4437; //Google
+        }
+        &_009
+        {
+            background: #E3E3E3; // Github
+        }
+        &_010
+        {
+            background: #666; // Password
+        }
+        &_011
+        {
+            background: #2C4762;
+        }
+        &_012
+        {
+            background: #fff;
+        }
+        &_013
+        {
+            background: #EA4335;
+        }
+        &_014
+        {
+            background: #FBBC05;
+        }
+        &_015
+        {
+            background: #4285F4;
+        }
+        &_016
+        {
+            background: #34A853;
+        }
+    }
+}
+
+.markdown
+{
+    a
+    {
+        color: #4183C4;
+    }
+    h1, h2, h3, h4, h5, h6
+    {
+        font-size: 16px;
+    }
+    ul, ol
+    {
+        padding-left: 30px;
+    }
+    ul :first-child, ol :first-child
+    {
+        margin-top: 0;
+    }
+    ul :last-child, ol :last-child
+    {
+        margin-bottom: 0;
+    }
+    code, tt {
+        padding: 0 5px;
+
+        white-space: nowrap;
+
+        border: 1px solid #eaeaea;
+        border-radius: 3px;
+        background-color: #f8f8f8;
+    }
+    pre code
+    {
+        margin: 0;
+        padding: 0;
+
+        white-space: pre;
+
+        border: none;
+        background: transparent;
+    }
+    code {
+        margin: 5px 0;
+        display: inline-block;
+    }
+    pre {
+        margin: 5px 0;
+        overflow: auto;
+        padding: 6px 10px;
+        display: inline-block;
+
+        border: 1px solid #cccccc;
+        border-radius: 3px;
+        background-color: #f8f8f8;
+
+        font-size: 13px;
+        line-height: 19px;
+    }
+    pre code, pre tt {
+        border: none;
+        background-color: transparent;
+    }
+}

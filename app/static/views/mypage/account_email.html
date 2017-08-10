@@ -1,0 +1,21 @@
+{% extends "parts/layout.html" %}
+{% block body %}
+<div class="l_000">
+    <h1 class="p_002 b_002 c_b_011 c_c_001">Email</h1>
+    {% include "parts/menu.html" %}
+    <form action="{{ '' | getenv('SITE_URL') }}/mypage/account/email/post" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="email" class="p_005 b_002" name="email" value="{% if data.email %}{{ data.email }}{% endif %}">
+        <input type="submit" class="p_004 b_002 c_b_001 c_c_001" value="Update">
+    </form>
+    {% if data.error %}
+    <p class="p_003 b_002 c_c_001 c_b_005">{{ data.error }}</p>
+    {% endif %}
+</div>
+<div class="l_002 _1">
+    <a href="/logout" class="p_009 c_c_003 i_0004 icon"></a>
+</div>
+<div class="l_002">
+    <a href="/topics" class="p_009 c_c_003 i_0003 icon"></a>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "parts/layout.html" %}
+{% block body %}
+<div class="l_000">
+    <h1 class="p_002 b_002 c_b_011 c_c_001">Mypage</h1>
+    {% include "parts/menu.html" %}
+    <div class="l_004">
+        <img src="{{ data.icon }}" alt="{{ data.name }}">
+    </div>
+    <p class="p_010 c_b_012">{{ data.name }}</p>
+</div>
+<div class="l_002 _1">
+    <a href="/logout" class="p_009 c_c_003 i_0004 icon"></a>
+</div>
+<div class="l_002">
+    <a href="/topics" class="p_009 c_c_003 i_0003 icon"></a>
+</div>
+{% endblock %}

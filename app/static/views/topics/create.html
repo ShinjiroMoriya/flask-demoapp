@@ -1,0 +1,31 @@
+{% extends "parts/layout.html" %}
+{% block body %}
+<div class="l_000">
+    <h1 class="p_002 b_002 c_b_011 c_c_001">Topic Create</h1>
+    {% include "parts/menu.html" %}
+    <form action="{{ '' | getenv('SITE_URL') }}/mypage/topics/create/post" name="form" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="b_002 c_b_012">
+            <textarea class="p_008" name="topic" placeholder="内容を入力"></textarea>
+        </div>
+        {% if False %}
+        <input id="image" type="file" class="p_5000" name="image" accept="image/*">
+        {% endif %}
+        <input type="submit" class="p_004 b_002 c_b_001 c_c_001" value="Create">
+    </form>
+    <script src="/assets/js/autosize.min.js"></script>
+    <script> autosize(document.querySelectorAll('textarea')); </script>
+    {% if data.error %}
+    <p class="p_003 b_002 c_c_001 c_b_005">{{ data.error }}</p>
+    {% endif %}
+    <p class="p_001 b_002 c_c_001 c_b_004">
+        <a href="/mypage/topics">Back</a>
+    </p>
+</div>
+<div class="l_002 _1">
+    <a href="/logout" class="p_009 c_c_003 i_0004 icon"></a>
+</div>
+<div class="l_002">
+    <a href="/topics" class="p_009 c_c_003 i_0003 icon"></a>
+</div>
+{% endblock %}
