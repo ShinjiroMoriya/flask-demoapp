@@ -31,7 +31,7 @@ htmlmin==0.1.12
 httplib2==0.17.0
 idna==2.9
 itsdangerous==1.1.0
-Jinja2==2.11.1
+Jinja2==2.11.3
 Mako==1.1.2
 Markdown==3.2.1
 MarkupSafe==1.1.1
